@@ -121,16 +121,19 @@ if not st.session_state.rich_templates_data:
     st.error("Application cannot start because design templates could not be loaded. Please ensure your BANNERBEAR_API_KEY is correct and restart.", icon="🛑")
     st.stop()
 
+# --- START OF CHANGE: Moved file uploader to sidebar ---
+with st.sidebar:
+    st.header("Upload Image")
+    staged_file_bytes = st.file_uploader("Attach an image to your next message", type=["png", "jpg", "jpeg"])
+    if staged_file_bytes:
+        st.session_state.staged_file = staged_file_bytes.getvalue()
+        st.success("✅ Image attached and ready!")
+# --- END OF CHANGE ---
+
 # Display chat history
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"], unsafe_allow_html=True)
-
-# Intuitive File Uploader
-staged_file_bytes = st.file_uploader("Attach an image", type=["png", "jpg", "jpeg"])
-if staged_file_bytes:
-    st.session_state.staged_file = staged_file_bytes.getvalue()
-    st.success("✅ Image attached. It will be sent with your next message.")
 
 # Chat input logic
 if prompt := st.chat_input("Your message..."):
