@@ -41,7 +41,7 @@ def load_all_template_details():
 
 def initialize_session_state():
     defaults = {
-        "messages": [{"role": "assistant", "content": "Hello! I'm your design assistant. Just tell me what you need to create, for example, 'a flyer for a new listing'."}],
+        "messages": [{"role": "assistant", "content": "Hello! I'm your design assistant. Just tell me what you need to create."}],
         "gemini_model": get_gemini_model(GEMINI_API_KEY),
         "rich_templates_data": load_all_template_details(),
         "design_context": {"template_uid": None, "modifications": []},
