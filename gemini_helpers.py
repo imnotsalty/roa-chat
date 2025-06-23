@@ -1,4 +1,3 @@
-# gemini_helpers.py
 import google.generativeai as genai
 import json
 
@@ -42,7 +41,6 @@ def get_gemini_model(api_key):
 def generate_gemini_response(model, chat_history, user_prompt, rich_templates_data, current_design_context):
     """Generates a response from the AI, which now acts as a workflow controller."""
     
-    # --- THIS IS YOUR ORIGINAL PROMPT. THE ONLY CHANGES ARE CLEARLY MARKED ADDITIONS. ---
     context_prompt = f"""You are a super-intuitive, friendly, and helpful design assistant for Realty of America. Your entire job is to understand the user's natural language and immediately decide on ONE of four actions. You are an action-taker, not a conversationalist, but your responses in `response_text` should be friendly.
 
     **YOUR FOUR ACTIONS (You MUST choose one):**
@@ -99,10 +97,8 @@ def generate_gemini_response(model, chat_history, user_prompt, rich_templates_da
 
     conversation = [{'role': 'user', 'parts': [context_prompt]}, {'role': 'model', 'parts': ["Understood. I am an action-oriented design assistant. I will distinguish between refining a current design and requests for a new template based on intelligent analysis. My primary goal is to use the `MODIFY` action immediately to start or update a design based on the user's request."]}]
     for msg in chat_history[-8:]:
-        # ** SYNTAX ERROR FIX HERE **
         if msg['role'] == 'user':
             conversation.append({'role': 'user', 'parts': [msg['content']]})
-        # ** SYNTAX ERROR FIX HERE **
         elif msg['role'] == 'assistant' and '![Generated Image]' not in msg['content']:
             conversation.append({'role': 'model', 'parts': [msg['content']]})
     conversation.append({'role': 'user', 'parts': [user_prompt]})

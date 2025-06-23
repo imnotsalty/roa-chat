@@ -4,7 +4,6 @@ import time
 BASE_URL = "https://api.bannerbear.com/v2"
 
 def list_templates(api_key: str):
-    """Fetches a summary of all templates for the given API key."""
     headers = {"Authorization": f"Bearer {api_key}"}
     try:
         response = requests.get(f"{BASE_URL}/templates", headers=headers)
@@ -15,7 +14,6 @@ def list_templates(api_key: str):
         return None
 
 def get_template_details(api_key: str, template_uid: str):
-    """Fetches the full details, including layers, for a single template."""
     headers = {"Authorization": f"Bearer {api_key}"}
     try:
         response = requests.get(f"{BASE_URL}/templates/{template_uid}", headers=headers)
@@ -26,7 +24,6 @@ def get_template_details(api_key: str, template_uid: str):
         return None
 
 def create_image(api_key: str, template_id: str, modifications: list):
-    """Starts the image generation process."""
     headers = {"Authorization": f"Bearer {api_key}"}
     payload = {
         "template": template_id,
@@ -41,7 +38,6 @@ def create_image(api_key: str, template_id: str, modifications: list):
         return None
 
 def poll_for_image(api_key: str, image_object: dict):
-    """Polls the API until the image generation is complete."""
     headers = {"Authorization": f"Bearer {api_key}"}
     polling_url = image_object.get("self")
     if not polling_url:

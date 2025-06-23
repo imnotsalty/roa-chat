@@ -1,11 +1,8 @@
-# ui_helpers.py
 import streamlit as st
 
 def inject_css():
     """Injects minimal CSS needed ONLY for the custom typing indicator."""
-    
-    # Colors are now controlled by config.toml, but we can reference them
-    # in case we need to style a custom component like this.
+
     roa_dark_blue = "#003366"
 
     css = f"""
